@@ -23,8 +23,12 @@ export default class LoginPage extends BasePage {
 
   async navigateToLoginPage() {
     await test.step('Navigate to login page', async () => {
-      await this.page.goto('/wiki/Special:UserLogin?returnto=Main_Page');
-      await expect(this.loginForm.usernameInput, 'The login form must be shown').toBeVisible();
+      // auth.wikimedia.org now and then answers the redirect with "invalid returnUrlToken"
+      // instead of the form; a new redirect gets a new token
+      await expect(async () => {
+        await this.page.goto('/wiki/Special:UserLogin?returnto=Main_Page');
+        await expect(this.loginForm.usernameInput).toBeVisible({ timeout: 5_000 });
+      }, 'The login form must be shown').toPass({ timeout: 45_000 });
     });
   }
 
