@@ -32,7 +32,9 @@ export default class PreferencesPage extends BasePage {
       tab: (tabName: string) => this.page.getByRole('tab', { name: tabName }),
       languageOption: (optionLabel: string) =>
         this.page.getByRole('option', { name: optionLabel, exact: true }),
-      savedMessage: (message: string) => this.page.getByText(message),
+      // The same text is also duplicated into a hidden screen reader live region
+      savedMessage: (message: string) =>
+        this.page.locator('#mw-notification-area').getByText(message),
     };
   }
 
