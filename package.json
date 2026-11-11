@@ -1,0 +1,23 @@
+{
+  "name": "wikipedia-language-aqa",
+  "private": true,
+  "type": "module",
+  "description": "Playwright + TypeScript: an authorized user changes the Wikipedia interface language",
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "5.2.2",
+    "@types/node": "22.7.5",
+    "prettier": "3.4.1"
+  },
+  "dependencies": {
+    "@playwright/test": "1.63.0",
+    "dotenv": "16.4.5"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report",
+    "format": "prettier --write .",
+    "docker:build": "docker compose build",
+    "docker:test": "docker compose run --rm tests"
+  }
+}

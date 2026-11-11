@@ -1,0 +1,13 @@
+services:
+  tests:
+    build: .
+    image: wikipedia-language-aqa
+    env_file:
+      - .env
+    environment:
+      - CI=true
+    ipc: host
+    volumes:
+      # The HTML report and failure artifacts are written straight to the host folders
+      - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
